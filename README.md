@@ -1,8 +1,8 @@
-# React Utility Hooks
+# React Utility Hooks Hub
 
-![npm](https://img.shields.io/npm/v/react-utility-hooks?color=blue) ![license](https://img.shields.io/badge/license-MIT-green) ![downloads](https://img.shields.io/npm/dt/react-utility-hooks)
+![npm](https://img.shields.io/npm/v/react-utility-hooks-hub?color=blue) ![license](https://img.shields.io/badge/license-MIT-green) ![downloads](https://img.shields.io/npm/dt/react-utility-hooks)
 
-**React Utility Hooks** is a collection of reusable custom hooks for React applications. These hooks are designed to simplify common tasks and enhance the functionality of your React components.
+**React Utility Hooks Hub** is a collection of reusable custom hooks for React applications. These hooks are designed to simplify common tasks and enhance the functionality of your React components.
 
 ## Table of Contents
 
@@ -22,7 +22,7 @@
 To install the package, use npm:
 
 ```bash
-npm install react-utility-hooks
+npm install react-utility-hooks-hub
 ```
 
 ## Available Hooks
@@ -34,7 +34,7 @@ The `useDebounce` hook debounces a value, ensuring that it only updates after a 
 #### Usage
 
 ```javascript
-import { useDebounce } from "react-utility-hooks";
+import { useDebounce } from "react-utility-hooks-hub";
 
 const debouncedValue = useDebounce(value, delay);
 ```
@@ -54,7 +54,7 @@ The `useFetch` hook provides a simple way to fetch data from an API endpoint and
 #### Usage
 
 ```javascript
-import { useFetch } from "react-utility-hooks";
+import { useFetch } from "react-utility-hooks-hub";
 
 const { data, error, loading, successMessage, errorMessage } = useFetch(
   url,
@@ -83,7 +83,7 @@ The `useMediaQuery` hook checks if a media query matches the current viewport si
 #### Usage
 
 ```javascript
-import { useMediaQuery } from "react-utility-hooks";
+import { useMediaQuery } from "react-utility-hooks-hub";
 
 const matches = useMediaQuery(query);
 ```
@@ -105,7 +105,7 @@ Below is an example of a search component that uses the `useDebounce` and `useFe
 
 ```jsx
 import React, { useState } from "react";
-import { useDebounce, useFetch } from "react-utility-hooks";
+import { useDebounce, useFetch } from "react-utility-hooks-hub";
 
 const SearchComponent = () => {
   const [query, setQuery] = useState("");
@@ -165,7 +165,7 @@ Below is an example of a responsive component that uses the `useMediaQuery` hook
 
 ```jsx
 import React from "react";
-import { useMediaQuery } from "react-utility-hooks";
+import { useMediaQuery } from "react-utility-hooks-hub";
 
 const ResponsiveComponent = () => {
   // Check if the screen width is at least 768px (tablet or desktop)
