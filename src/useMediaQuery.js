@@ -13,8 +13,11 @@ export function useMediaQuery(query) {
     setMatches(mediaQuery.matches);
 
     const handler = (event) => setMatches(event.matches);
-    mediaQuery.addEventListener("change", handler); // Use addEventListener
-    return () => mediaQuery.removeEventListener("change", handler); // Use removeEventListener
+    mediaQuery.addEventListener("change", handler);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handler);
+    };
   }, [query]);
 
   return matches;

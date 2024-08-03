@@ -1,6 +1,6 @@
 {
   "name": "react-utility-hooks-hub",
-  "version": "1.0.01",
+  "version": "1.0.02",
   "type": "module",
   "description": "A collection of reusable custom hooks for React applications",
   "main": "dist/index.cjs.js",

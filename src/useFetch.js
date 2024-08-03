@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /**
  * Custom hook to fetch data from an API endpoint.
@@ -11,27 +11,30 @@ export function useFetch(url, method = "GET", options = {}) {
   const [state, setState] = useState({
     data: null,
     error: null,
-    loading: true,
+    loading: false,
     successMessage: null,
     errorMessage: null,
   });
 
+  const abortControllerRef = useRef(null);
+  const memoizedOptions = useRef(options);
+
   useEffect(() => {
-    const abortController = new AbortController(); // Create an AbortController
+    if (!url) return;
+
+    abortControllerRef.current = new AbortController();
 
     const fetchData = async () => {
-      setState({
-        data: null,
-        error: null,
+      setState((prevState) => ({
+        ...prevState,
         loading: true,
-        successMessage: null,
-        errorMessage: null,
-      }); // Reset state before fetching
+      }));
+
       try {
         const response = await fetch(url, {
-          ...options,
-          method, // Add the HTTP method
-          signal: abortController.signal, // Pass abort signal
+          ...memoizedOptions.current,
+          method,
+          signal: abortControllerRef.current.signal,
         });
 
         if (!response.ok) throw new Error("Network response was not ok");
@@ -42,14 +45,15 @@ export function useFetch(url, method = "GET", options = {}) {
           error: null,
           loading: false,
           successMessage: "Data fetched successfully!",
+          errorMessage: null,
         });
       } catch (error) {
-        if (!abortController.signal.aborted) {
-          // Ignore errors caused by aborting
+        if (!abortControllerRef.current.signal.aborted) {
           setState({
             data: null,
             error,
             loading: false,
+            successMessage: null,
             errorMessage: error.message,
           });
         }
@@ -59,9 +63,11 @@ export function useFetch(url, method = "GET", options = {}) {
     fetchData();
 
     return () => {
-      abortController.abort(); // Cleanup: abort ongoing request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
     };
-  }, [url, method, options]);
+  }, [url, method]);
 
   return state;
 }
